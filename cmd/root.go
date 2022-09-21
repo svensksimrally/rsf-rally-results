@@ -30,7 +30,7 @@ var (
 func init() {
 	rootCmd.PersistentFlags().String("level", "INFO", "log level")
 	//rootCmd.PersistentFlags().String("series", "series/", "where series are fetched from")
-	rootCmd.PersistentFlags().String("output", "docs/", "where to publish the resulting files")
+	rootCmd.PersistentFlags().String("output", "dist/", "where to publish the resulting files")
 
 	viper.BindPFlag("level", rootCmd.PersistentFlags().Lookup("level"))
 	//viper.BindPFlag("series", rootCmd.PersistentFlags().Lookup("series"))

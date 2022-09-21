@@ -10,24 +10,29 @@ import (
 )
 
 // Do the export of the series standings and results into html.
-func Do() error {
+func Do() (err error) {
 	tempDir, err := os.MkdirTemp("", "")
 	if err != nil {
-		return err
+		return
 	}
 	defer os.RemoveAll(tempDir)
 
 	log.WithField("tempdir", tempDir).Debug("Created temporary folder")
 
 	// TODO: fetch clubs and generate the templates
-	if err := commit(viper.GetString("output"), tempDir); err != nil {
-		return err
+
+	if err = render(filepath.Join(tempDir, "index.html")); err != nil {
+		return
 	}
 
-	// TODO: for now just copy the template
+	// TODO: render the front page; what should be on it ?
+
+	if err = commit(viper.GetString("output"), tempDir); err != nil {
+		return
+	}
 
 	log.Info("All done!")
-	return nil
+	return
 }
 
 func commit(outputDir, inputDir string) error {
@@ -37,11 +42,15 @@ func commit(outputDir, inputDir string) error {
 	if err := os.RemoveAll(outputDir); err != nil {
 		return err
 	}
-	// TODO: copy assets
 
-	// TODO: temporary just copying the index file
-	if err := fileutils.CopyFile("templates/index.html", filepath.Join(outputDir, "index.html")); err != nil {
-		return nil
+	log.Debug("Copying generated files")
+	if err := fileutils.CopyDir(inputDir, filepath.Join(outputDir)); err != nil {
+		return err
+	}
+
+	log.Debug("Copying static assets")
+	if err := fileutils.CopyDir("assets", filepath.Join(outputDir, "assets")); err != nil {
+		return err
 	}
 
 	return fileutils.CopyDir(inputDir, outputDir)

@@ -1,0 +1,26 @@
+{{define "navigation"}}<div class="container-fluid">
+    <a class="navbar-brand" href="#">
+        <img class src="/assets/images/logo-fallback.jpg" alt="Rally Results" height="32">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Results
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Series #1</a></li>
+                    <li><a class="dropdown-item" href="#">Series #2</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            <li class="nav-item">
+                <a class="nav-link p-2 bi bi-github" href="https://github.com/tobier/rsf-rally-results" target="_blank" rel="noopener" aria-label="GitHub" style="font-size: 1.2em"></a>
+            </li>
+        </ul>
+    </div>
+</div>{{ end }}
