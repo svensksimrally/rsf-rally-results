@@ -17,19 +17,22 @@ var (
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			fs := http.FileServer(http.Dir(viper.GetString("output")))
+			serveFolder := viper.GetString("output")
+			port := viper.GetUint16("port")
+
+			fs := http.FileServer(http.Dir(serveFolder))
 			http.Handle("/", fs)
 
-			// TODO: make this configurable
-			port := 8000
-
-			log.WithField("port", port).Info("Serving results on localhost")
+			log.Infof("Serving results from '%s' on localhost:%d", serveFolder, port)
 			return http.ListenAndServe(fmt.Sprintf(":%d", port), logRequest(http.DefaultServeMux))
 		},
 	}
 )
 
 func init() {
+	serveCmd.Flags().Uint16("port", 8000, "http server listening port")
+
+	viper.BindPFlag("port", serveCmd.Flags().Lookup("port"))
 	rootCmd.AddCommand(serveCmd)
 }
 

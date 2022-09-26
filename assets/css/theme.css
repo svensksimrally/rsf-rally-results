@@ -1,0 +1,33 @@
+@import url("../fonts/wrc_clean/stylesheet.css");
+
+@media (min-width: 992px) {
+    /* Compensate for the top navbar */
+    body {
+        padding-top: 5.5rem;
+    }
+    .hover-bg > .nav-item {
+        padding: 1rem;
+    }
+    .hover-bg > .nav-item:hover, .hover-bg > .active {
+        background: #fc4c02;
+    }
+    .hover-bg > .active > a.nav-link {
+        color: white;
+    }
+}
+
+body {
+    font-family: 'WRC Clean Roman';
+}
+
+nav.navbar {
+    font-family: 'WRC Clean';
+}
+
+ul.nav-pills > li.nav-item > button {
+    color: black;
+}
+
+ul.nav-pills > li.nav-item > button.active {
+    background: #fc4c02;
+}
