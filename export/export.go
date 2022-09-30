@@ -7,7 +7,8 @@ import (
 	"github.com/caarlos0/log"
 	"github.com/go-pkgz/fileutils"
 	"github.com/spf13/viper"
-	"github.com/tobier/rsf-rally-results/render"
+	"github.com/tobier/rsf-rally-results/model"
+	"github.com/tobier/rsf-rally-results/site"
 )
 
 // Do the export of the series standings and results into html.
@@ -20,10 +21,10 @@ func Do() (err error) {
 
 	log.WithField("tempdir", tempDir).Debug("Created temporary folder")
 
-	p := render.Placeholder{}
+	m := model.Model{}
 
 	// TODO: fetch series and generate the templates
-	if err = p.Render(filepath.Join(tempDir, "index.html")); err != nil {
+	if err = site.Render(&m, tempDir); err != nil {
 		return
 	}
 

@@ -1,10 +1,18 @@
 @import url("../fonts/wrc_clean/stylesheet.css");
 
-@media (min-width: 992px) {
-    /* Compensate for the top navbar */
-    body {
-        padding-top: 5.5rem;
+body {
+    font-family: 'WRC Clean Roman';
+    
+    /* Compensate for the top navbar on small devices */
+    padding-top: 4rem;
+}
+
+@media (min-width: 770px) {
+    body { 
+        /* Compensate for the top navbar on larger devices */
+        padding-top: 5rem;
     }
+
     .hover-bg > .nav-item {
         padding: 1rem;
     }
@@ -16,12 +24,9 @@
     }
 }
 
-body {
-    font-family: 'WRC Clean Roman';
-}
-
 nav.navbar {
     font-family: 'WRC Clean';
+    font-size: large;
 }
 
 ul.nav-pills > li.nav-item > button {
