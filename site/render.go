@@ -9,7 +9,7 @@ import (
 	"github.com/caarlos0/log"
 )
 
-func render(outfileName string, data interface{}) (err error) {
+func render(outfileName, contentTemplate string, data interface{}) (err error) {
 	log.WithField("file", outfileName).Debug("Rendering template")
 
 	parent := filepath.Dir(outfileName)
@@ -25,9 +25,12 @@ func render(outfileName string, data interface{}) (err error) {
 
 	functions := template.FuncMap{
 		"ToUpper": strings.ToUpper,
+		"Add": func(i int, y int) int {
+			return i + y
+		},
 	}
 
-	t, err := template.New("base").Funcs(functions).ParseFiles("templates/nav.tpl.html", "templates/base.tpl.html")
+	t, err := template.New("base").Funcs(functions).ParseFiles(contentTemplate, "templates/nav.tpl.html", "templates/base.tpl.html")
 	if err != nil {
 		return
 	}

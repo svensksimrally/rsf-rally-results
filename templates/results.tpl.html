@@ -1,0 +1,32 @@
+{{define "content"}}<section class="d-grid gap-3 mx-5">
+  <h2 class="highlight">{{ .Name }} Results</h2>
+  <ul class="nav nav-pills" id="resultTabs" role="tablist">{{ range $i, $event := .Events }}
+    <li class="nav-item" role="presentation">
+      <button class="nav-link{{ if eq $i 0 }} active{{ end }}" id="tab-{{ $event.ID }}" data-bs-toggle="tab" data-bs-target="#tab-pane-{{ $event.ID }}" type="button" role="tab" aria-controls="tab-pane-{{ $event.ID }}" aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}">{{ $event.Name }}</button>
+    </li>{{end}}
+  </ul>
+  <div class="tab-content" id="resultTabsContent">{{ range $i, $event := .Events }}
+    <div class="tab-pane{{ if eq $i 0 }} show active{{ end }}" id="tab-pane-{{ $event.ID }}" role="tabpanel" aria-labelledby="tab-{{ $event.ID }}" tabindex="0">
+      <table class="table table-striped">
+        <thead>
+          <tr class="table-light">
+            <th scope="col">Pos</th>
+            <th scope="col">Driver</th>
+            <th scope="col">Time</th>
+            <th scope="col">Diff-1</th>
+            <th scope="col">Diff Tot.</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{ range $j, $result := $event.Results }}<tr>
+            <td scope="col">{{ Add $j 1 }}</td>
+            <td scope="col">{{ $result.Driver }}</td>
+            <td scope="col">{{ $result.Total }}</td>
+            <td scope="col">{{ $result.DiffPrev }}</td>
+            <td scope="col">{{ $result.DiffFirst }}</td>
+          </tr>{{ end }}
+        </tbody>
+      </table>
+    </div>{{ end }}
+  </div>
+</section>{{ end }}
